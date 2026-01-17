@@ -29,10 +29,19 @@ except:
     st.title("🚚 BogioSpeed v2.1")
 
 # --- 2. CONEXÃO (Lógica do Colab adaptada para Site) ---
+# --- 2. CONEXÃO (Lógica do Colab com Proteção de Chave) ---
 def conecta_planilha():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    # Aqui usamos a Service Account que você configurou nos Secrets
-    creds = Credentials.from_service_account_info(st.secrets["gcp_service_account"], scopes=scope)
+    
+    # Pegamos os dados dos Secrets
+    secret_dict = dict(st.secrets["gcp_service_account"])
+    
+    # ESTA LINHA ABAIXO É A CURA PARA O "INCORRECT PADDING":
+    # Ela garante que as quebras de linha da chave sejam lidas corretamente pelo Python
+    if "\\n" in secret_dict["private_key"]:
+        secret_dict["private_key"] = secret_dict["private_key"].replace("\\n", "\n")
+    
+    creds = Credentials.from_service_account_info(secret_dict, scopes=scope)
     client = gspread.authorize(creds)
     return client.open("Invoices BogioSpeed")
 
