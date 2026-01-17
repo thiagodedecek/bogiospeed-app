@@ -24,7 +24,7 @@ st.markdown("""
 
 # Exibição da Logo
 try:
-    st.image("BOGIO-SPEED-Logo-1-1536x217.png", width=400)
+    st.image("logo.png", width=400)
 except:
     st.title("🚚 BogioSpeed v2.1")
 
