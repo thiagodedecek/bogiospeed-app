@@ -53,7 +53,7 @@ with st.form("form_bogio_v23", clear_on_submit=True):
         cliente_sel = st.selectbox("CUSTOMER / Cliente", lista_clientes)
         cliente_novo = st.text_input("Se 'Altro', nome del cliente")
     with col2:
-        kind_serv = st.text_input("KIND OF SERVICE", value="Rodoviário")
+        kind_serv = st.text_input("KIND OF SERVICE", value="Transporto Stradale")
         data_closed = st.date_input("JOB CLOSED / Data Esecuzione")
         plate_no = st.text_input("PLATE Nº / Targa / Placa")
 
